@@ -1,7 +1,7 @@
 -- Q1 What is the total amount each customer spent at the restaurant?
 select 
     s.customer_id
-	, sum(m.price) as amount_spent
+    , sum(m.price) as amount_spent
 from dannys_diner.sales as s 
 	full outer join 
 	dannys_diner.menu as m on s.product_id = m.product_id
