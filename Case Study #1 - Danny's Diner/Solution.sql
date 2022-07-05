@@ -113,7 +113,7 @@ where pmp.order_rank = 1;
 select 
     s.customer_id
     , count(s.product_id) as total_items
-    , sum(m.price) as ammount_spent
+    , sum(m.price) as amount_spent
 from dannys_diner.sales as s
     inner join
     dannys_diner.members as c on s.customer_id = c.customer_id
