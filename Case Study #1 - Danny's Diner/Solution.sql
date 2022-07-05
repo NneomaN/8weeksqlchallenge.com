@@ -98,7 +98,7 @@ with
 	from dannys_diner.sales as s
 	    inner join
 	    dannys_diner.members as c on s.customer_id = c.customer_id
-	where s.order_date <= c.join_date
+	where s.order_date < c.join_date
     )
 
 select
