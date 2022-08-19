@@ -3,7 +3,7 @@
 
  <img src="https://user-images.githubusercontent.com/77930192/185507440-8ea5519c-343c-48aa-8816-bce7fab3a70e.png" alt="8weeksqlchallenge_Pizza_Runner_Banner" width="500" height="500"/>
 
-My attempt at solving the Pizza Runner case study of the 8 weeks SQL challenge using T-SQL to query data hosted on an MS SQL Server.
+*My attempt at solving the Pizza Runner case study of the 8 weeks SQL challenge using T-SQL to query data hosted on an MS SQL Server*.
 
 ## Problem Statement
 
