@@ -13,8 +13,8 @@ The Case studies contain datasets from the following domains:
 # Table of Content
 Week | Case Study	|Solution
 ----| ----| ----
-1 |	Danny's Diner |	[Solution](/Case Study-%231---Danny's-Diner/README.md)
-2 | Pizza Runner | [Solution](/Case-Study-%232---Pizza-Runner/README.md)
+1 |	Danny's Diner |	[Solution](/Case%20Study%20%231%20-%20Danny's%20Diner/README.md)
+2 | Pizza Runner | [Solution](/Case%20Study%20%232%20-%20Pizza%20Runner/README.md)
 3 |	Foodie-Fi | 
 4	| Data Bank | 
 5	| Data Mart | 
