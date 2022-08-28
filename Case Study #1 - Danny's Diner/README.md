@@ -18,22 +18,28 @@ Here's a view of the schema of the sample data provided.
 More details on the case study can be found [here](https://8weeksqlchallenge.com/case-study-1/).
 
 ## Case Study Solutions
+
 **1. What is the total amount each customer spent at the restaurant?**  
 ```SQL
 select 
     s.customer_id
     , sum(m.price) as amount_spent
 from dannys_diner.sales as s 
-    full outer join 
+    full outer join  
     dannys_diner.menu as m on s.product_id = m.product_id
 group by s.customer_id;
 ```
+
+The sales and menu tables were joined to be able to acces the price information of the products bought by customers. This was then sumed up per customer to determine how much was spent by each. 
 
 customer_id | amount_spent
 ----------- | ------------
 A           | 76
 B           | 74
 C           | 36
+
+The sample data provided shows that customer A has spent the most closely followed by customer B. 
+
 
 **2. How many days has each customer visited the restaurant?**  
 ```SQL
@@ -44,11 +50,14 @@ from dannys_diner.sales as s
 group by s.customer_id;
 ```
 
+It is important to include the *distinct* funtion when counting the days as customers can visit the stoe tice in one day or purchase more than one item during their visit, and each purchse is recorded on a separate row.
+
 customer_id | number_of_days
 ----------- | --------------
 A           | 4
 B           | 6
 C           | 2
+
 
 **3. What was the first item from the menu purchased by each customer?**  
 ```SQL
@@ -70,12 +79,16 @@ from product_rankings as pr
     dannys_diner.menu as m on pr.product_id = m.product_id
 where pr.product_rank = 1;
 ```
+
+First we need to rank the products bought by each customer according to the order_date. we do this using the *rank() over(partition by )* functions. The result is instantiated in a common table expression called 'product rankings'. The final result is a query from this table joined to the menu table, to get the product name information, filtered to where the product rank is *1*, returning the first item purchased by each customer.
+
 customer_id | product_name
 ----------- | ------------
 A           | curry
 A           | sushi
 B           | curry
 C           | ramen
+
 
 **4. What is the most purchased item on the menu and how many times was it purchased by all customers?**  
 ```SQL
@@ -88,9 +101,13 @@ from dannys_diner.sales as s
 group by m.product_name
 order by count(s.product_id) desc;
 ```
+
+Each occurrence of the product ids in the sales table is counted, and the results are ordered by the highest product count. The top result is filtered as the most purchased product.
+
 product_name | number_of_purchases
 ------------ | -------------------
 ramen        | 8
+
 
 **5. Which item was the most popular for each customer?**  
 ```SQL
@@ -113,6 +130,8 @@ from product_freq as pf
     dannys_diner.menu as m on pf.product_id = m.product_id
 where pf.number_of_purchases = 1;
 ```
+First we need to rank the products bought by each customer according to the number of each product purchased. As with the 3rd question, we use the *rank() over(partition by )* functions. The result is instantiated in a common table expression called 'product_freq'. The final result is a query from this table joined to the menu table, to get the product name information, filtered to where the product rank is *1*, returning the most purchased product by each customer.
+
 customer_id | most_popular_product
 ----------- | --------------------
 A           | ramen
@@ -146,6 +165,10 @@ from member_purchases as mp
     dannys_diner.menu as m on mp.product_id = m.product_id
 where mp.order_rank = 1;
 ```
+
+Again we employ the use of a CTE to create a subset of data for purchases where customers have signed up to be members. This is determined by selecting records where the orders are made on or after the date a customer became a member. 
+
+
 customer_id | product_name
 ----------- | ------------
 A           | curry
@@ -176,11 +199,16 @@ from premember_purchases as pmp
     dannys_diner.menu as m on pmp.product_id = m.product_id
 where pmp.order_rank = 1;
 ```
+
+Here we create a subset of data for purchases before customers have signed up to be members. This is determined by selecting records where the orders are before the date a customer became a member. 
+
+
 customer_id | product_name
 ----------- | ------------
 A           | sushi
 A           | curry
 B           | sushi
+
 
 **8. What is the total items and amount spent for each member before they became a member?**  
 ```SQL
@@ -200,6 +228,7 @@ customer_id | total_items | amount_spent
 ----------- | ----------- | ------------
 A           | 2           | 25
 B           | 3           | 40
+
 
 **9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?**  
 ```SQL
@@ -223,6 +252,9 @@ from dannys_diner.sales as s
     product_points as pp on s.product_id = pp.product_id
 group by s.customer_id;
 ```
+
+A CTE is created to denote points for products purchased using the 'Case' clause. This is then joined to the sales table to generate the final result set grouping sales by customer_id and summing the product points.
+
 customer_id | total_points
 ----------- | ------------
 A           | 860
@@ -258,6 +290,10 @@ select
 from purchase_points as pp
 group by customer_id;
 ```
+
+A similar CTE is created as in the previous question using the 'Case' clause, which is adjusted to accommodate records where the order date is within a week of the join date, using the dateadd function. We only add 6 days as the join date is accounted for in the first week. The result set is filtered for orders on or before the last day of January. The final result set is then queried from this table.
+
+
 customer_id | total_points
 ----------- | ------------
 A           | 1370
