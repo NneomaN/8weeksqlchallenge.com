@@ -2,13 +2,7 @@
 
 This repository contains my my attempt at solving the case studies in the [8 weeks SQL Challenge](8weeksqlchallenge.com) put together by @DataWithDanny. 
 
-The Case studies contain datasets from the following domains:
-- Health analytics
-- Marketing analytics
-- People analytics
-- Financial markets
-- Fast moving consumer goods
-- Digital marketing
+The Case studies contain datasets from various domains and are designed to help data professionals develop and showcase their SQL skills.
 
 # Table of Content
 Week | Case Study	|Solution
