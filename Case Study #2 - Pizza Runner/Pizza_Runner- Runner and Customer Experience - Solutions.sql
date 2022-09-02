@@ -2,7 +2,7 @@
 
 -- First we need to define the week range starting from whatever day Jan 1st falls on
 
--- create variable to hold fisrt day of week value
+-- create variable to hold first day of week value
 declare @dw_no int
 set @dw_no = datepart(dw, '2021-01-01');
 
