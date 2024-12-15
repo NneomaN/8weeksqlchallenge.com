@@ -16,4 +16,4 @@ Week | Case Study	|Solution
 7	| Balanced Tree Clothing Co. |
 8	| Fresh Segments | 
 
-All codes are written using the T-SQL implementation.
+All codes are written using the T-SQL syntax.
